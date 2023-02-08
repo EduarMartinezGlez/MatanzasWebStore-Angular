@@ -9,14 +9,6 @@
           <h1 class="mb-8 text-3xl text-center">Add Product</h1>
           <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4"
             formControlName="productname" require placeholder="Product Name" />
-<!--
-
-            <input list="options" id="category" name="category" formControlName = "category">
-
-<datalist id="options">
-  <option *ngFor="let item of resp" [value]="item">{{ item }}</option>
-</datalist> -->
-
 
             <input type="text" list="options" formControlName = "category"
             class="block border border-grey-light w-full p-3 rounded mb-4">
@@ -29,9 +21,6 @@
 
           <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4" formControlName="brand"
             require placeholder="Brand" />
-
-
-
 
             <textarea id="message" rows="6" formControlName="productdetails"
             class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded mb-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
