@@ -28,8 +28,8 @@ export class DashboardService {
     this.data =await prodData
     console.log('en el set del servicio ', this.data);
     return this.data
-
   }
+
   get getProduct(){
     console.log('en el get de servicio ', this._product);
     return  {...this._product}
