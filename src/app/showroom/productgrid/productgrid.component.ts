@@ -49,8 +49,9 @@ getProducts() {
    });
 }
 addShpCart(id:string){
+  console.log(' eb el id del add', id);
 
-    this.service.updateData(id);
+    //this.service.updateData(id);
   }
 
 
