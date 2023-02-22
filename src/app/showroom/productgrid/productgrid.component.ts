@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ProdgrillService } from '../prodgrill.service';
@@ -9,7 +9,7 @@ import { ProdgrillService } from '../prodgrill.service';
   templateUrl: './productgrid.component.html',
   styleUrls: ['./productgrid.component.scss']
 })
-export class ProductgridComponent implements OnInit {
+export class ProductgridComponent implements OnInit, OnDestroy  {
   private baseUrl = environment.baseUrl;
   count: any;
   product: any[] = []
@@ -48,10 +48,25 @@ getProducts() {
       // Haz algo con los productos aquí
    });
 }
-addShpCart(id:string){
+addShpCart(id:number){
   console.log(' eb el id del add', id);
 
+
+  this.Shopproduct.push(id);
+  this.Shopproduct = this.Shopproduct.filter((elem, index) => {
+    return this.Shopproduct.indexOf(elem) === index;
+  })
+
+    this.service.setData(this.Shopproduct);
+
+console.log('el array de product',this.Shopproduct);
+
+
+
     //this.service.updateData(id);
+  }
+  ngOnDestroy() {
+    console.log('Sender component destroyed');
   }
 
 

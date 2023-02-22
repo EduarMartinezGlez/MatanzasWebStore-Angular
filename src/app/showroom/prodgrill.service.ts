@@ -9,11 +9,35 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ProdgrillService {
+
    _id!: number;
   private baseUrl = environment.baseUrl;
    product:any
+   Shopproduct: any[] = [];
 
-  constructor(private http: HttpClient) {}
+   private product$ = new BehaviorSubject<any>({});
+   selectedProduct$ = this.product$.asObservable();
+
+
+  //  setProduct(product: any) {
+  //   console.log('en el servcio setproduct', product);
+  //    this.product$.next(product);
+  //  }
+
+   setData(data: any) {
+    console.log('serdata', data);
+
+    this.product$.next(data);
+  }
+
+  getData() {
+    console.log('getdata', this.product$);
+
+    return this.product$.asObservable();
+  }
+
+
+  constructor(private http: HttpClient) { console.log('DataService constructor called');}
 
   setObject(obj: any) {
     this.product = obj;
@@ -49,6 +73,16 @@ export class ProdgrillService {
 
   updateData(data: string) {
     this.data.next(data);
+  }
+  agregarDatosAlArray(datos: number) {
+    // Agregar los datos al array existente
+    this.Shopproduct.push(datos);
+    this.Shopproduct = this.Shopproduct.filter((elem, index) => {
+      return this.Shopproduct.indexOf(elem) === index;
+    })
+    console.log('en el array en el servicio', this.Shopproduct);
+
+//return this.Shopproduct
   }
 
 }
