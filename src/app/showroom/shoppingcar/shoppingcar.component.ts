@@ -18,6 +18,8 @@ export class ShoppingcarComponent {
         console.log('paramettos de produc', params['productos']);
 
         this.productosSeleccionados = params['productos'];
+        console.log('product select', this.productosSeleccionados);
+
       }
     });
 

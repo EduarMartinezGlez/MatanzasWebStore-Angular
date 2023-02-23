@@ -9,17 +9,16 @@ import { ProdgrillService } from '../prodgrill.service';
   templateUrl: './productgrid.component.html',
   styleUrls: ['./productgrid.component.scss']
 })
-export class ProductgridComponent implements OnInit, OnDestroy  {
+export class ProductgridComponent implements OnInit  {
   private baseUrl = environment.baseUrl;
   count: any;
   product: any[] = []
-  Shopproduct: number[] = []
+  Shopproduct: any[] = []
 
 
 constructor(
   private http: HttpClient,
   private router: Router,
-//  private dataservice:ProdgrillService,
   private service:ProdgrillService
 ){}
 
@@ -30,7 +29,6 @@ ngOnInit() {
 
 }
 productdetails(id:number){
-// this.service.getproduct(id)
   this.router.navigateByUrl(`/product/details/${id}`)
 }
 getProducts() {
@@ -44,28 +42,28 @@ getProducts() {
       resp[1].forEach((element: any) => {
         this.product.push(element)
       });
-      console.log('subcrive', this.product);
       // Haz algo con los productos aquí
    });
 }
-addShpCart(id:number){
-  console.log(' eb el id del add', id);
+addShpCart(id:number, name:string, price:number){
+  const productToShop= {
+    id:id,
+    name:name,
+    price:price
+  }
 
-
-  this.Shopproduct.push(id);
-  this.Shopproduct = this.Shopproduct.filter((elem, index) => {
-    return this.Shopproduct.indexOf(elem) === index;
-  })
+  this.Shopproduct.push(productToShop);
+  this.Shopproduct = this.Shopproduct.filter((obj, index, self) =>
+  index === self.findIndex((t) => (
+    t.id === obj.id && t.name === obj.name
+  )))
+console.log('el producto shop', this.Shopproduct);
 
     this.service.actualizarProductosSeleccionados(this.Shopproduct);
 
-
-console.log('el array de product',this.Shopproduct);
   }
 
-  ngOnDestroy() {
-    console.log('Sender component destroyed');
-  }
+
   irAPaginaDeProductos() {
     this.router.navigate(['/product/shoppingcart'], { state: { productos: this.service.productosSeleccionados } });
   }
