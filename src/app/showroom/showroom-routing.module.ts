@@ -11,8 +11,8 @@ const routes: Routes = [
     path:'',
     children:[
       {path:'', component:ProductgridComponent},
-      {path:'details/:id', component:ProductdetailsComponent, canActivate: [GuardGuard]},
-      {path:'shoppingcart', component:ShoppingcarComponent,canActivate: [GuardGuard]}
+      {path:'details/:id', component:ProductdetailsComponent},
+      {path:'shoppingcart', component:ShoppingcarComponent}
     ]
   }
 ];

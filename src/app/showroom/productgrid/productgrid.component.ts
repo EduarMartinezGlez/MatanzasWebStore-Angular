@@ -57,17 +57,17 @@ addShpCart(id:number){
     return this.Shopproduct.indexOf(elem) === index;
   })
 
-    this.service.setData(this.Shopproduct);
+    this.service.actualizarProductosSeleccionados(this.Shopproduct);
+
 
 console.log('el array de product',this.Shopproduct);
-
-
-
-    //this.service.updateData(id);
   }
+
   ngOnDestroy() {
     console.log('Sender component destroyed');
   }
-
+  irAPaginaDeProductos() {
+    this.router.navigate(['/product/shoppingcart'], { state: { productos: this.service.productosSeleccionados } });
+  }
 
 }

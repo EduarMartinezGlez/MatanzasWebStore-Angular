@@ -15,29 +15,17 @@ export class ProdgrillService {
    product:any
    Shopproduct: any[] = [];
 
-   private product$ = new BehaviorSubject<any>({});
-   selectedProduct$ = this.product$.asObservable();
-
-
-  //  setProduct(product: any) {
-  //   console.log('en el servcio setproduct', product);
-  //    this.product$.next(product);
-  //  }
-
-   setData(data: any) {
-    console.log('serdata', data);
-
-    this.product$.next(data);
-  }
-
-  getData() {
-    console.log('getdata', this.product$);
-
-    return this.product$.asObservable();
-  }
 
 
   constructor(private http: HttpClient) { console.log('DataService constructor called');}
+
+  productosSeleccionados: any[] = [];
+
+  actualizarProductosSeleccionados(nuevosProductos: any[]) {
+    this.productosSeleccionados = nuevosProductos;
+    console.log('productos selecionados', this.productosSeleccionados);
+
+  }
 
   setObject(obj: any) {
     this.product = obj;

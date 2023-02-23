@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProdgrillService } from '../prodgrill.service';
 
 @Component({
@@ -6,21 +7,24 @@ import { ProdgrillService } from '../prodgrill.service';
   templateUrl: './shoppingcar.component.html',
   styleUrls: ['./shoppingcar.component.scss']
 })
-export class ShoppingcarComponent implements OnInit {
+export class ShoppingcarComponent {
 
-  constructor(
-  public service:ProdgrillService
-  ){}
-  selectedProduct: any
+  productosSeleccionados: any[] = [];
 
+  constructor(private route: ActivatedRoute, private dataService: ProdgrillService) {
 
-  ngOnInit(){
-    this.service.getData().subscribe((value) => {
-      this.selectedProduct = value;
+    this.route.params.subscribe(params => {
+      if (params && params['productos']) {
+        console.log('paramettos de produc', params['productos']);
+
+        this.productosSeleccionados = params['productos'];
+      }
     });
-    console.log('en oninit', this.selectedProduct);
 
-
+    if (window.history.state.productos) {
+      this.productosSeleccionados = window.history.state.productos;
+      this.dataService.actualizarProductosSeleccionados(this.productosSeleccionados);
+    }
   }
 
 

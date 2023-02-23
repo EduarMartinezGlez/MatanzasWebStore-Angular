@@ -13,12 +13,7 @@ export class GuardGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | boolean{
-      return this.dataService.getData().pipe(
-        map(data => {
-          console.log('en el guard', data);
-          // El servicio sigue activo y emitiendo el último valor.
-    return data;
-  })
-      )
+     return true
+
 }
 }
