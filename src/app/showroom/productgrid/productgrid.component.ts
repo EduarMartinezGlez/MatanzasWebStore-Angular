@@ -60,6 +60,11 @@ addShpCart(id:number, name:string, price:number){
   )))
 console.log('el producto shop', this.Shopproduct);
 
+const myShopCartStore = JSON.stringify( this.Shopproduct );
+
+// Guardar la cadena de texto en el localStorage utilizando setItem()
+localStorage.setItem("myShopcartStore", myShopCartStore);
+
     this.service.actualizarProductosSeleccionados(this.Shopproduct);
 
   }
