@@ -24,18 +24,14 @@ export class ProductdetailsComponent implements OnInit {
     console.log('inicionado componente', this.id);
     const id = parseInt(this.id);
     this.getproduct(this.id)
-    // this.service.getproduct(id);
-    //  = this.service.getObject();
+
   }
   getproduct(id: number) {
-   // this.setIdProd(id)
+   
     console.log('en el grtproduct del servicio', id);
     const url = `${this.baseUrl}/products/${id}`;
     return (
       this.http.get(url).subscribe((resp: any) => {
-      //  console.log('resp del servicio', resp);
-    //  this._id = resp
-     //   this.setObject(resp)
      this.product = resp
         console.log('this.producto en el servicio', this.product);
       }))

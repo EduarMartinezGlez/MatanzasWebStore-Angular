@@ -49,7 +49,8 @@ addShpCart(id:number, name:string, price:number){
   const productToShop= {
     id:id,
     name:name,
-    price:price
+    price:price,
+    amount: 1
   }
 
   this.Shopproduct.push(productToShop);

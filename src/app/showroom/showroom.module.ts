@@ -6,6 +6,8 @@ import { ProductgridComponent } from './productgrid/productgrid.component';
 import { ProductdetailsComponent } from './productdetails/productdetails.component';
 import { ShoppingcarComponent } from './shoppingcar/shoppingcar.component';
 import{ProdgrillService} from './prodgrill.service'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import{ProdgrillService} from './prodgrill.service'
   imports: [
     CommonModule,
     ShowroomRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [ProdgrillService]
