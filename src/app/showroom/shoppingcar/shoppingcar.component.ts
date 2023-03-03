@@ -17,41 +17,53 @@ export class ShoppingcarComponent {
 
   productSelect: any[] = [];
   productToBuy:{}={}
+  amount: number = 1
   showValue: number =0;
   prodTotalValue: any[] =[]
 
   constructor(
     private route: ActivatedRoute,
     private dataService: ProdgrillService,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder
     ) {
 
-      this.route.params.subscribe(params => {
-        if (params && params['productos']) {
-          console.log('paramettos de produc', params['productos']);
+      // this.route.params.subscribe(params => {
+      //   if (params && params['productos']) {
+      //     console.log('paramettos de produc', params['productos']);
 
-          this.productSelect = params['productos'];
-          console.log('product select', this.productSelect);
+      //     this.productSelect = params['productos'];
+      //     console.log('product select', this.productSelect);
 
-        }
-      });
+      //   }
+      // });
 
-      if (window.history.state.productos) {
-        this.productSelect = window.history.state.productos;
-        this.dataService.actualizarProductosSeleccionados(this.productSelect);
-        console.log('productos resividos', this.productSelect);
-        for (const key in this.productSelect) {
-        //  if (Object.prototype.hasOwnProperty.call(object, key)) {
+      // if (window.history.state.productos) {
+      //   this.productSelect = window.history.state.productos;
+      //   this.dataService.actualizarProductosSeleccionados(this.productSelect);
+      //   console.log('productos resividos', this.productSelect);
+      //   for (const key in this.productSelect) {
+      //     console.log('dentro del for ', this.productSelect[key].price);
+      //       this.prodTotalValue.push(this.productSelect[key].price);
+      //   }
+      //   console.log('prod valor conun for',this.prodTotalValue);
+      // }
+    }
+    ngOnInit(){
+      const cart = localStorage.getItem("myShopcartStore");
+     this.productSelect = JSON.parse(cart!);
+     for (const key in this.productSelect) {
           console.log('dentro del for ', this.productSelect[key].price);
-
             this.prodTotalValue.push(this.productSelect[key].price);
-
-         // }
         }
-        console.log('prod valor conun for',this.prodTotalValue);
+    // if (this.productSelect!){
+    //   this.countProduct = this.myShopcartStorage.length
+    // }
+    // else{
+    //   this.countProduct = 0
+    // }
+      //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+      //Add 'implements OnInit' to the class.
 
-
-      }
     }
 
 
@@ -79,6 +91,11 @@ this.prodTotalValue[i] = prod.amount * prod.price
    console.log('valor de la cantidad', this.productToBuy);
 
   }
+delete(i:number, ){
+ // const index = this.prodTotalValue.indexOf(id);
+   this.productSelect = this.productSelect.splice(i, 1)
+
+}
 
 
 
