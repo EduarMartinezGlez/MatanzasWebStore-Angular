@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation  } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -15,6 +15,7 @@ import { DashboardService } from '../service/dashboard.service';
   selector: 'app-addproducts',
   templateUrl: './addproducts.component.html',
   styleUrls: ['./addproducts.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddproductsComponent {
   selectedFile!: File;
@@ -34,6 +35,10 @@ export class AddproductsComponent {
     private service: DashboardService,
 
   ) {}
+  agregarHtml(): void {
+    const div = document.getElementById('mi-div')
+    div?.innerHTML
+  }
   getData() {
   const url = `${this.baseUrl}/categories`;
     return this.http.get<{[key: string]: any}>(url);
@@ -57,6 +62,8 @@ export class AddproductsComponent {
     productdetails: ['', [Validators.required]],
   });
 
+  
+ 
  /**
   * If the new value is less than 1 or if the new value is not a number, then set the value to 0
   * @param {number} newValue - The value that the user has entered.

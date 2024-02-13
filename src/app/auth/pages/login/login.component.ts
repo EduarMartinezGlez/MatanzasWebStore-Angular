@@ -30,9 +30,9 @@ export class LoginComponent {
       '',
       [
         Validators.required,
-        Validators.pattern(
-          '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$'
-        ),
+        // Validators.pattern(
+        //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$'
+        // ),
       ],
     ],
   });
@@ -46,6 +46,8 @@ export class LoginComponent {
       return this.isValid = true;
 
     } else if (!control?.touched) {
+      console.log("true");
+      
       return this.isValid = true
     }
     else {
@@ -55,6 +57,8 @@ export class LoginComponent {
   }
   login() {
     const { email, password } = this.loginForm.value;
+    console.log('él email y el pass', email, password);
+    
     this.authService.login(email, password).subscribe(resp => {
       //todo funciona, sale swal, y entra al dashboard
 
@@ -66,9 +70,10 @@ export class LoginComponent {
           text: 'unauthorized',
         });
 
-      } const val = Object.values(resp)
+      } 
+      const val = Object.values(resp)
       if (val[0].role === 'Admin') {
-        //  console.log('respuesta si if es igal a admin', val[0].role);
+         console.log('respuesta si if es igal a admin', val[0].role);
         this.router.navigateByUrl('/dashboard');
       } else {
         val[0].role === 'costumers'
